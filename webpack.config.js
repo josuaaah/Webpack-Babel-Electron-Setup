@@ -14,5 +14,24 @@ module.exports = {
     // devTool: 'cheap-source-map'
     devServer: {
         static: './dist'
+    },
+    module: {
+        rules: [
+            {
+              test: /\.m?js$/,
+              exclude: /node_modules/,
+              use: {
+                loader: "babel-loader",         // allows users to add custom handling of Babel's 
+                                                // configuration for each file that it processes
+                options: {
+                  presets: [
+                      '@babel/preset-env',      // allows you to use the latest JavaScript without 
+                                                // needing to micromanage which syntax transforms
+                      "@babel/preset-react"
+                    ]
+                }
+              }
+            }
+        ]
     }
 };
