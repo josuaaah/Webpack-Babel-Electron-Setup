@@ -1,9 +1,13 @@
 {
+    "main": "./src/index.js",
+    "target": "electron-main",
     "devDependencies": {
         "@babel/core": "^7.18.0",
         "@babel/preset-env": "^7.18.0",
         "@babel/preset-react": "^7.17.12",
         "babel-loader": "^8.2.5",
+        "concurrently": "^7.2.0",
+        "electron": "^18.2.4",
         "html-webpack-plugin": "^5.5.0",
         "webpack": "^5.72.1",
         "webpack-cli": "^4.9.2",
@@ -12,6 +16,7 @@
     "private": true,
     "scripts": {
         "start": "webpack serve --open --mode development --config webpack.config.js",
+        "startElec": "concurrently --kill-others --names \"webpack,electron\" \"npm run start\" \"electron\"",
         "prod": "webpack --config webpack.config.js"
     }
 }

@@ -1,19 +1,36 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { spawn } = require('child_process');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/app.js',
     output: {
-        clean: true
+        clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/index.html')
+            template: path.resolve(__dirname, './src/index.html'),
         })
     ],
     // devTool: 'cheap-source-map'
     devServer: {
-        static: './dist'
+        static: './dist',
+        // onBeforeSetupMiddleware: function (devServer) {
+        //     if (!devServer) {
+        //         throw new Error('webpack-dev-server is not defined');
+        //     }
+        //     spawn(
+        //         'electron',
+        //         ['.'],
+        //         {
+        //             shell: true,
+        //             env: process.env,
+        //             stdio: 'inherit',
+        //         }
+        //     )
+        //         .on('close', process.exit(0))
+        //         .on('error', spawnError => console.error(spawnError))
+        // },
     },
     module: {
         rules: [
@@ -29,9 +46,9 @@ module.exports = {
                                                 // needing to micromanage which syntax transforms
                       "@babel/preset-react"
                     ]
-                }
-              }
-            }
-        ]
-    }
+                },
+              },
+            },
+        ],
+    },
 };
